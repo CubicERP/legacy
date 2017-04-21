@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    "name": "Account and Stock Extend",
+    "name": "Account and Stock Extend (deprecated)",
     "version": "1.0",
     "description": """
 Add enhacements to accounting on stock moves.

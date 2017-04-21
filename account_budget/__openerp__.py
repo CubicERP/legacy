@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Budgets Management',
+    'name': 'Budgets Management (deprecated)',
     'version': '1.0',
     'category': 'Accounting & Finance',
     'description': """

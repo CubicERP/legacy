@@ -440,7 +440,7 @@ class CrossoveredBudgetLines(models.Model):
     name = fields.Char('Reference')
     crossovered_budget_id = fields.Many2one('crossovered.budget', 'Budget', ondelete='cascade', select=True,
                                             required=True)
-    main_budget_id = fields.Many2one('crossovered_budget_id.budget_id', string="Main Budget", readonly=True, store=True)
+    main_budget_id = fields.Many2one('budget.budget',related='crossovered_budget_id.budget_id', string="Main Budget", readonly=True, store=True)
 
     main_budget_type = fields.Selection(related='crossovered_budget_id.budget_id.type', string="Main Budget Type",
                                         readonly=True, store=True)
