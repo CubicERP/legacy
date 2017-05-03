@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+        <record id="view_bank_statement_form_bank_budget" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.inherit.bank.voucher</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bank_account_id']" position="before">
+                    <field name="analytic_id" attrs="{'readonly' : [('journal_entry_id', '!=', False)] }"/>
+                    <field name="budget_struct_id" attrs="{'readonly' : [('journal_entry_id', '!=', False)] }"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_bank_statement_form_bank_budget2" model="ir.ui.view">
+            <field name="name">account.bank.cash.statement.form.inherit.bank.voucher</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="budget_struct_id"/>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</openerp>
