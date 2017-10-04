@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_create_payment_order_lines" model="ir.ui.view">
+            <field name="name">payment.purchase.create.form</field>
+            <field name="model">payment.purchase</field>
+            <field name="arch" type="xml">
+                <form string="Search Payment lines">
+                    <separator string="Purchase Orders"/>
+                    <field name="entries"/>
+                    <footer>
+                        <button name="create_payment" string="Add to payment order" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_create_purchase_order" model="ir.actions.act_window">
+            <field name="name">Populate Payment from Purchase</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment.purchase</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>
