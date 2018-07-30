@@ -210,7 +210,7 @@ class CrossoveredBudget(models.Model):
     date_to = fields.Date(string='End Date', required=True, states={'draft': [('readonly', False)]}, readonly=True)
     state = fields.Selection(
         [('draft', 'Draft'), ('cancel', 'Cancelled'), ('confirm', 'Confirmed'), ('validate', 'Validated'),
-         ('done', 'Done')], 'Status', select=True, required=True, readonly=True, copy=False, default='draft')
+         ('done', 'Done')], 'Status', index=True, required=True, readonly=True, copy=False, default='draft')
     crossovered_budget_line = fields.One2many('crossovered.budget.lines', 'crossovered_budget_id',
                                               string='Budget Lines',
                                               states={'draft': [('readonly', False)]}, readonly=True, copy=True)
@@ -438,7 +438,7 @@ class CrossoveredBudgetLines(models.Model):
 
     sequence = fields.Integer('Sequence', default=5)
     name = fields.Char('Reference')
-    crossovered_budget_id = fields.Many2one('crossovered.budget', 'Budget', ondelete='cascade', select=True,
+    crossovered_budget_id = fields.Many2one('crossovered.budget', 'Budget', ondelete='cascade', index=True,
                                             required=True)
     main_budget_id = fields.Many2one('crossovered_budget_id.budget_id', string="Main Budget", readonly=True, store=True)
 
@@ -454,14 +454,14 @@ class CrossoveredBudgetLines(models.Model):
     date_from = fields.Date('Start Date', required=True)
     date_to = fields.Date('End Date', required=True)
     paid_date = fields.Date('Paid Date')
-    planned_amount = fields.Float('Planned Amount', required=True, digits_compute=dp.get_precision('Account'))
+    planned_amount = fields.Float('Planned Amount', required=True, digits=dp.get_precision('Account'))
     practical_amount = fields.Float(compute="_prac", string='Practical Amount',
-                                    digits_compute=dp.get_precision('Account'), store=True)
+                                    digits=dp.get_precision('Account'), store=True)
 
     theoritical_amount = fields.Float(compute="_theo", string='Theoretical Amount',
-                                      digits_compute=dp.get_precision('Account'))
+                                      digits=dp.get_precision('Account'))
     available_amount = fields.Float(compute="_avail", string='Pending Amount',
-                                    digits_compute=dp.get_precision('Account'))
+                                    digits=dp.get_precision('Account'))
     percentage = fields.Float(compute="_perc", string='Percentage')
     company_id = fields.Many2one(related="crossovered_budget_id.company_id", string='Company', store=True,
                                  readonly=True)
